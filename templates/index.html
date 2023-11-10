@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container py-5 mb-3 content" x-data="{}">
+  <div class="text-end mb-4">
+    <div style="font-size: 2em; cursor: pointer;"
+      x-on:click="location.href='https://github.com/celina-lopez/epub_to_audio'">
+      <i class="fab fa-github"></i>
+    </div>
+  </div>
+  <div class="text-center mb-4">
+    <div class="h1 text-center fancy-font">
+      <b>EPUB</b> <span class="text-main">TO <b>AUDIO</b></span>
+    </div>
+  </div>
+  <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+  <form action="/" method="POST" target="dummyframe" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <div class="text-center"><button type="submit" class="btn btn-file mt-3">convert</button></div>
+
+  </form>
+</div>
+
+<div class="footer-copyright text-center py-3">
+  <i>Bc i can't read</i>
+</div>
+{% endblock %}

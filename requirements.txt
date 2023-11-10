@@ -1,0 +1,7 @@
+Flask
+openai
+python-dotenv
+bs4
+boto3
+ebooklib
+pydub
