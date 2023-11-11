@@ -12,9 +12,8 @@ def index_create():
             return redirect(request.url)
         file = request.files['file']
         if file and allowed_file(file.filename):
-            file_paths = epub_to_speech(file)
-            # TODO: upload to s3
-            return redirect(url_for('show', id='124'))  # update later
+            id = epub_to_speech(file)
+            return redirect(url_for('show', id=id))  # update later
     elif request.method == 'GET':
         return render_template('index.html')
 
