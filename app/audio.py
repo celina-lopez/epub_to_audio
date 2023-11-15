@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 import os
 from pydub import AudioSegment
-from utils import create_temp_file, cleanup
+from app.utils import create_temp_file, cleanup
 from app.book import convert_epub_to_text, slice_text
 
 load_dotenv(dotenv_path='.env')
@@ -27,8 +27,7 @@ def generate_audible(file):
     sliced_text = slice_text(text)
     file_paths = []
     for i, text in enumerate(sliced_text):
-        file_path = f'{i}.mp3'
-        speak(text, file_path)
+        file_path = speak(text)
         file_paths.append(file_path)
     return combine_segments(file_paths)
 

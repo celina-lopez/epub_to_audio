@@ -1,6 +1,5 @@
-from flask import Flask, request, render_template, redirect, url_for
-from app.main import allowed_file, epub_to_speech
-
+from flask import Flask, request, render_template, redirect
+from app.main import allowed_file, epub_to_speech, get_url
 appz = Flask(__name__)
 
 
@@ -13,15 +12,9 @@ def index_create():
         file = request.files['file']
         if file and allowed_file(file.filename):
             id = epub_to_speech(file)
-            return redirect(url_for('show', id=id))  # update later
+            return redirect(get_url(id))
     elif request.method == 'GET':
         return render_template('index.html')
-
-
-@appz.route('/<id>', methods=['GET'])
-def show(id):
-    if request.method == 'GET':
-        return render_template('show.html', id=id)
 
 
 if __name__ == '__main__':

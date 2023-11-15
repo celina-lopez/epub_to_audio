@@ -15,13 +15,14 @@ BUCKET = os.getenv("AUDIO_BUCKET")
 
 
 def epub_to_speech(file):
-    file_name = generate_audible(file, 'output.mp3')
+    file_name = generate_audible(file)
     return upload(file_name)
 
 
 def upload(file_path):
     uid = str(uuid.uuid4())
     key = f'{uid}.mp3'
+    print(f"Uploading {file_path} to {key}")
     s3.meta.client.upload_file(file_path, BUCKET, key)
     return uid
 

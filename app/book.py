@@ -1,7 +1,6 @@
 from ebooklib import epub, ITEM_DOCUMENT
 from bs4 import BeautifulSoup
-from utils import create_temp_file, cleanup
-
+from app.utils import create_temp_file, cleanup
 MAX_OUTPUT = 4096  # characters
 
 
@@ -9,8 +8,8 @@ def slice_text(text):
     return [text[i:i + MAX_OUTPUT] for i in range(0, len(text), MAX_OUTPUT)]
 
 
-async def convert_epub_to_text(file):
-    contents = await file.read()
+def convert_epub_to_text(file):
+    contents = file.read()
     file_name = create_temp_file('epub')
     tmp_file = open(file_name, 'wb')
     tmp_file.write(contents)
