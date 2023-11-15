@@ -24,7 +24,7 @@ def upload(file_path):
     key = f'{uid}.mp3'
     print(f"Uploading {file_path} to {key}")
     s3.meta.client.upload_file(file_path, BUCKET, key)
-    return uid
+    return key
 
 
 def get_url(key):
