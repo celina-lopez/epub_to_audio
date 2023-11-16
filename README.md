@@ -4,3 +4,4 @@
 - [ ] calculator
 - [ ] option to use locally
 - [ ] openai key
+- [ ] instructions
