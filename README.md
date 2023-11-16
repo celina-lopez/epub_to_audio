@@ -1,3 +1,6 @@
 # TODO
 
-- [] refresh ui
+- [ ] refresh ui
+- [ ] calculator
+- [ ] option to use locally
+- [ ] openai key
