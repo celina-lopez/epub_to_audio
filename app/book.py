@@ -1,6 +1,8 @@
 from ebooklib import epub, ITEM_DOCUMENT
 from bs4 import BeautifulSoup
+import re
 from app.utils import create_temp_file, cleanup
+from app.ai import get_quote_genders
 MAX_OUTPUT = 4096  # characters
 
 
@@ -32,6 +34,23 @@ def read_epub(file_name):
     for item in items:
         text += chapter_to_text(item)
     return text
+
+
+def get_quotes(text):
+    quotations = re.findall(r'"([^"]*)"', text)
+    return quotations
+
+
+def parse_content_quotes(content):
+    quotations = get_quotes(content)
+    gendered_quotations = get_quote_genders(content, quotations)
+
+
+def merge_gendered_quotations(quotes):
+    return {
+        'M': [quote[0] for quote in quotes if quote[1] == 'M'],
+        'F': [quote[0] for quote in quotes if quote[1] == 'F'],
+    }
 
 
 def allowed_file(file_name):
