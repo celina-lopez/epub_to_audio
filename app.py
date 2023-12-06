@@ -15,7 +15,7 @@ def index_create():
             return redirect(request.url)
         file = request.files['file']
         if file and allowed_file(file.filename):
-            id = epub_to_speech(file)
+            id = epub_to_speech(file, is_rich=False)
             return redirect(get_url(id))
     elif request.method == 'GET':
         return render_template('index.html')
