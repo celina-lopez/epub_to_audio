@@ -10,8 +10,7 @@ appz = Flask(__name__)
 @appz.route('/', methods=['POST', 'GET'])
 def index_create():
     if request.method == 'POST':
-        # if request.headers['x-api-key'] != os.getenv("API_KEY") or 'file' not in request.files:
-        if 'file' not in request.files:
+        if request.headers['x-api-key'] != os.getenv("API_KEY") or 'file' not in request.files:
             return redirect(request.url)
         file = request.files['file']
         if file and allowed_file(file.filename):
