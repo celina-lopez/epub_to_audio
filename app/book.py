@@ -17,6 +17,7 @@ def convert_epub_to_text(file):
     tmp_file.close()
     text = read_epub(file_name)
     cleanup(file_name)
+    text = " ".join(text.splitlines())
     return text
 
 
@@ -36,7 +37,7 @@ def read_epub(file_name):
 
 
 def get_quotes(text):
-    quotations = re.findall(r'"([^"]*)"', text)
+    quotations = re.findall(r'“([^”]*)”', text)
     return quotations
 
 

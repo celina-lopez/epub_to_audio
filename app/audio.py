@@ -5,6 +5,7 @@ import os
 from pydub import AudioSegment
 from app.utils import create_temp_file, cleanup
 from app.book import convert_epub_to_text, slice_text, get_quotes
+from app.ai import get_quote_genders
 
 load_dotenv(dotenv_path='.env')
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -56,7 +57,8 @@ def generate_rich_audible(file):
 
 
 def process_segment(text, file_paths):
-    gendered_quotes = get_quotes(text)
+    quotes = get_quotes(text)
+    gendered_quotes = get_quote_genders(text, quotes)
     if gendered_quotes == []:
         speak_and_append_to_filepath(file_paths, text)
         return
@@ -65,7 +67,7 @@ def process_segment(text, file_paths):
         if before:
             speak_and_append_to_filepath(file_paths, before)
             speak_and_append_to_filepath(
-                file_paths, quote[0], GENDERED_VOICES[quote[1]])
+                file_paths, quote[0], voice=GENDERED_VOICES[quote[1]])
     if after:
         speak_and_append_to_filepath(file_paths, after)
 

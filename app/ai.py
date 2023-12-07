@@ -19,9 +19,9 @@ def get_quote_genders(content, quotations):
          },
         {"role": "user",
             "content": """
-            Here are the quote: {}
+            Here are the quotes: {}
             Here is the content: {}
-            """.format(quotations, content)},
+            """.format("/".join(quotations), content)},
     ]
     response = client.chat.completions.create(
         model='gpt-3.5-turbo', messages=messages)
