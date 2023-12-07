@@ -58,12 +58,14 @@ def generate_rich_audible(file):
 def process_segment(text, file_paths):
     gendered_quotes = get_quotes(text)
     if gendered_quotes == []:
-        return speak_and_append_to_filepath(file_paths, text)
+        speak_and_append_to_filepath(file_paths, text)
+        return
     for quote in gendered_quotes:
         before, after = slice_around_word(text, quote[0])
         if before:
             speak_and_append_to_filepath(file_paths, before)
-            speak_and_append_to_filepath(quote[0], GENDERED_VOICES[quote[1]])
+            speak_and_append_to_filepath(
+                file_paths, quote[0], GENDERED_VOICES[quote[1]])
     if after:
         speak_and_append_to_filepath(file_paths, after)
 
