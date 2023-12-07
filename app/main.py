@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 import uuid
 import os
-from app.audio import generate_audible
+from app.audio import generate_audible, generate_rich_audible
 
 load_dotenv(dotenv_path='.env')
 session = boto3.Session(
@@ -14,8 +14,11 @@ s3 = session.resource('s3')
 BUCKET = os.getenv("AUDIO_BUCKET")
 
 
-def epub_to_speech(file):
-    file_name = generate_audible(file)
+def epub_to_speech(file, is_rich=False):
+    if is_rich:
+        file_name = generate_rich_audible(file)
+    else:
+        file_name = generate_audible(file)
     return upload(file_name)
 
 
